@@ -24,15 +24,30 @@ const ProjectModal = ({ project, onClose }) => {
     }
     
     // Prevent scrolling on body when modal is open
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    const originalTouchAction = window.getComputedStyle(document.body).touchAction;
+    
     document.body.style.overflow = 'hidden'
     document.body.style.touchAction = 'none'
+    document.documentElement.style.overflow = 'hidden'
+    document.documentElement.style.overscrollBehavior = 'none'
+    
+    const preventDefault = (e) => {
+      if (e.touches.length > 1) return; // Allow pinch zoom if needed
+      e.preventDefault();
+    };
+
+    document.addEventListener('touchmove', preventDefault, { passive: false });
     
     window.addEventListener('resize', handleResize)
     
     return () => {
       window.removeEventListener('resize', handleResize)
-      document.body.style.overflow = 'unset'
-      document.body.style.touchAction = 'auto'
+      document.body.style.overflow = originalStyle
+      document.body.style.touchAction = originalTouchAction
+      document.documentElement.style.overflow = ''
+      document.documentElement.style.overscrollBehavior = ''
+      document.removeEventListener('touchmove', preventDefault);
     }
   }, [])
 
