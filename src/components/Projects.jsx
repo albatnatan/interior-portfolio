@@ -5,72 +5,28 @@ const Projects = ({ onProjectClick }) => {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // הגדרות - המתכנת צריך לעדכן את אלה פעם אחת
-  const GITHUB_USERNAME = 'albatnatan' // <-- כאן שמים את שם המשתמש בגיטהאב
-  const REPO_NAME = 'interior-portfolio'
-  const PROJECTS_PATH = 'public/projects'
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${PROJECTS_PATH}`)
+        // טעינת הקונפיגורציה שנוצרת אוטומטית בזמן ה-Build
+        const baseUrl = import.meta.env.BASE_URL
+        const response = await fetch(`${baseUrl}projects/projects-config.json`)
         
         if (!response.ok) {
-          throw new Error('Failed to fetch projects from GitHub')
+          throw new Error('Project config not found')
         }
 
-        const items = await response.json()
-        
-        if (!Array.isArray(items)) {
-          setProjects([])
-          setLoading(false)
-          return
-        }
-
-        const folders = items.filter(item => item.type === 'dir')
-        
-        if (folders.length === 0) {
-          setProjects([])
-          setLoading(false)
-          return
-        }
-        
-        const projectData = await Promise.all(folders.map(async (folder) => {
-          const folderRes = await fetch(folder.url)
-          const files = await folderRes.json()
-          
-          // קבלת נתיב בסיס יחסי שעובד גם ב-Vite וגם ב-GitHub Pages
-          const baseUrl = import.meta.env.BASE_URL
-          
-          const images = files
-            .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name))
-            .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
-            .map(f => `${baseUrl}projects/${folder.name}/${f.name}`)
-
-          if (images.length === 0) return null
-
-          const coverImage = images.find(img => img.toLowerCase().includes('cover')) || images[0]
-
-          return {
-            id: folder.sha,
-            title: folder.name.replace(/-/g, ' '),
-            image: coverImage,
-            images: images,
-            year: '2024'
-          }
-        }))
-
-        setProjects(projectData.filter(p => p !== null))
+        const data = await response.json()
+        setProjects(data.projects || [])
         setLoading(false)
       } catch (err) {
-        console.error('Error fetching from GitHub API:', err)
+        console.error('Error loading projects:', err)
+        setProjects([])
         setLoading(false)
       }
     }
 
-    if (GITHUB_USERNAME !== 'YOUR_USERNAME') {
-      fetchProjects()
-    }
+    fetchProjects()
   }, [])
 
   if (loading) {
@@ -85,7 +41,8 @@ const Projects = ({ onProjectClick }) => {
   if (projects.length === 0) {
     return (
       <div className="py-20 text-center text-warm-500">
-        לא נמצאו פרויקטים בתיקיית public/projects
+        <p className="mb-4 text-xl">עדיין לא הועלו פרויקטים.</p>
+        <p className="text-sm">העלו תיקיית פרויקט עם תמונות ל-public/projects ב-GitHub כדי שהם יופיעו כאן.</p>
       </div>
     )
   }
@@ -104,7 +61,7 @@ const Projects = ({ onProjectClick }) => {
             הפרויקטים שלי
           </h2>
           <p className="text-warm-600 text-lg max-w-2xl mx-auto">
-            כאן מופיעים הפרויקטים שהועלו לתיקיית public/projects ב-GitHub.
+            מבחר עבודות עיצוב פנים. כל פרויקט מוצג כספר דפדוף אינטראקטיבי.
           </p>
         </motion.div>
 
@@ -121,7 +78,7 @@ const Projects = ({ onProjectClick }) => {
             >
               <div className="relative overflow-hidden rounded-2xl shadow-lg">
                 <img
-                  src={project.image}
+                  src={project.image.startsWith('http') ? project.image : `${import.meta.env.BASE_URL}${project.image.replace(/^\//, '')}`}
                   alt={project.title}
                   className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
                 />

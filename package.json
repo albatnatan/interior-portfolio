@@ -6,7 +6,7 @@
   "homepage": "https://albatnatan.github.io/interior-portfolio",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-projects.js && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
