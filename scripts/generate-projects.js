@@ -20,7 +20,7 @@ function generateProjectsConfig() {
       
       const images = files
         .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f))
-        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
       if (images.length > 0) {
         const coverImage = images.find(img => img.toLowerCase().includes('cover')) || images[0];
