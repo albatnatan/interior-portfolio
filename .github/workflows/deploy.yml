@@ -18,13 +18,11 @@ jobs:
           node-version: 18
           cache: 'npm'
 
-      - name: Install and Build
-        run: |
-          npm install
-          npm run build
-        env:
-          VITE_GITHUB_USERNAME: albatnatan
-          VITE_REPO_NAME: interior-portfolio
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

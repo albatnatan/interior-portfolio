@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-const projectsDir = path.join(process.cwd(), 'public', 'projects');
-const outputFile = path.join(projectsDir, 'projects-config.json');
-
 function generateProjectsConfig() {
+  const projectsDir = path.join(process.cwd(), 'public', 'projects');
+  const outputFile = path.join(projectsDir, 'projects-config.json');
+
   if (!fs.existsSync(projectsDir)) {
     console.log('Projects directory not found, creating...');
     fs.mkdirSync(projectsDir, { recursive: true });
@@ -20,7 +20,7 @@ function generateProjectsConfig() {
       
       const images = files
         .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f))
-        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
 
       if (images.length > 0) {
         const coverImage = images.find(img => img.toLowerCase().includes('cover')) || images[0];
@@ -28,8 +28,8 @@ function generateProjectsConfig() {
         projects.push({
           id: item.name,
           title: item.name.replace(/-/g, ' '),
-          image: `/projects/${item.name}/${coverImage}`,
-          images: images.map(img => `/projects/${item.name}/${img}`),
+          image: `projects/${item.name}/${coverImage}`,
+          images: images.map(img => `projects/${item.name}/${img}`),
           year: '2024'
         });
       }
@@ -37,7 +37,7 @@ function generateProjectsConfig() {
   }
 
   fs.writeFileSync(outputFile, JSON.stringify({ projects }, null, 2));
-  console.log(`Generated config for ${projects.length} projects.`);
+  console.log(`Generated config for ${projects.length} projects at ${outputFile}`);
 }
 
 generateProjectsConfig();
