@@ -14,11 +14,26 @@ const Projects = ({ onProjectClick }) => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${PROJECTS_PATH}`)
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch projects from GitHub')
+        }
+
         const items = await response.json()
         
-        if (!Array.isArray(items)) return
+        if (!Array.isArray(items)) {
+          setProjects([])
+          setLoading(false)
+          return
+        }
 
         const folders = items.filter(item => item.type === 'dir')
+        
+        if (folders.length === 0) {
+          setProjects([])
+          setLoading(false)
+          return
+        }
         
         const projectData = await Promise.all(folders.map(async (folder) => {
           const folderRes = await fetch(folder.url)
