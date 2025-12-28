@@ -47,6 +47,8 @@ const Projects = ({ onProjectClick }) => {
             .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
             .map(f => `${baseUrl}projects/${folder.name}/${f.name}`)
 
+          if (images.length === 0) return null
+
           const coverImage = images.find(img => img.toLowerCase().includes('cover')) || images[0]
 
           return {
@@ -58,7 +60,7 @@ const Projects = ({ onProjectClick }) => {
           }
         }))
 
-        setProjects(projectData)
+        setProjects(projectData.filter(p => p !== null))
         setLoading(false)
       } catch (err) {
         console.error('Error fetching from GitHub API:', err)
