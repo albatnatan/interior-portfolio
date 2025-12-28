@@ -1,0 +1,17 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "פרויקט PRFinal",
+      "image": "/projects/prfinal/cover.jpg",
+      "images": [
+        "/projects/prfinal/page1.jpg",
+        "/projects/prfinal/page2.jpg",
+        "/projects/prfinal/page3.jpg"
+      ],
+      "year": "2024",
+      "location": "ירכא",
+      "size": "200 מ\"ר"
+    }
+  ]
+}
