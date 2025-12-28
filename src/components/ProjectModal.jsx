@@ -22,8 +22,18 @@ const ProjectModal = ({ project, onClose }) => {
     const handleResize = () => {
       setIsPortrait(window.innerWidth < 768)
     }
+    
+    // Prevent scrolling on body when modal is open
+    document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
+    
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.body.style.overflow = 'unset'
+      document.body.style.touchAction = 'auto'
+    }
   }, [])
 
   const nextImage = () => {
@@ -44,7 +54,7 @@ const ProjectModal = ({ project, onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 md:p-4"
+      className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-0 touch-none overscroll-none"
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
@@ -61,8 +71,7 @@ const ProjectModal = ({ project, onClose }) => {
           <X className="w-6 h-6 text-warm-800" />
         </button>
 
-        {/* Book Area */}
-        <div className="relative flex-grow bg-stone-900 overflow-hidden flex items-center justify-center p-0 shadow-2xl">
+        <div className="relative flex-grow bg-stone-900 overflow-hidden flex items-center justify-center p-0 shadow-2xl touch-none">
           <div className="w-full h-full flex items-center justify-center">
             <HTMLFlipBook
               width={900}
