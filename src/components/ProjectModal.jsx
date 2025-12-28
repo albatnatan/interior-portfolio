@@ -6,7 +6,7 @@ import HTMLFlipBook from 'react-pageflip'
 const Page = forwardRef((props, ref) => {
   return (
     <div className="page overflow-hidden bg-white shadow-2xl" ref={ref} data-density={props.density || 'soft'}>
-      <div className="w-full h-full relative border border-stone-200/50">
+      <div className="w-full h-full relative">
         {props.children}
       </div>
     </div>
@@ -102,26 +102,24 @@ const ProjectModal = ({ project, onClose }) => {
 
               {project.images.map((img, index) => (
                 <Page key={index}>
-                  <div className="w-full h-full relative flex items-center justify-center bg-white overflow-hidden">
+                  <div className="w-full h-full relative overflow-hidden">
+                    {/* The Image */}
+                    <img
+                      src={img}
+                      alt={`Page ${index + 1}`}
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    
                     {/* Paper Texture Overlay */}
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-10 pointer-events-none z-10" />
-                    
-                    {/* The Image */}
-                    <div className="w-full h-full">
-                      <img
-                        src={img}
-                        alt={`Page ${index + 1}`}
-                        className="w-full h-full object-cover pointer-events-none"
-                      />
-                    </div>
 
-                    {/* Depth Gradients */}
-                    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/20 to-transparent pointer-events-none z-20" />
+                    {/* Depth Gradients (Gutter shadow) */}
+                    <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/25 to-transparent pointer-events-none z-20" />
                     <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none z-20" />
                     
                     {/* Page Number */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-stone-400 text-[10px] font-mono tracking-widest uppercase opacity-60 z-20">
-                      Page {index + 1}
+                    <div className="absolute bottom-4 right-6 text-white/50 text-[10px] font-mono tracking-widest uppercase z-20">
+                      {index + 1}
                     </div>
                   </div>
                 </Page>
