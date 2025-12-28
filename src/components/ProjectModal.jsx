@@ -24,16 +24,18 @@ const ProjectModal = ({ project, onClose }) => {
     }
     
     // Prevent scrolling on body when modal is open
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    const originalTouchAction = window.getComputedStyle(document.body).touchAction;
+    const scrollY = window.scrollY;
+    const originalStyle = document.body.style.cssText;
     
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
     document.body.style.overflow = 'hidden'
     document.body.style.touchAction = 'none'
-    document.documentElement.style.overflow = 'hidden'
     document.documentElement.style.overscrollBehavior = 'none'
     
     const preventDefault = (e) => {
-      if (e.touches.length > 1) return; // Allow pinch zoom if needed
+      if (e.touches.length > 1) return;
       e.preventDefault();
     };
 
@@ -43,9 +45,8 @@ const ProjectModal = ({ project, onClose }) => {
     
     return () => {
       window.removeEventListener('resize', handleResize)
-      document.body.style.overflow = originalStyle
-      document.body.style.touchAction = originalTouchAction
-      document.documentElement.style.overflow = ''
+      document.body.style.cssText = originalStyle;
+      window.scrollTo(0, scrollY);
       document.documentElement.style.overscrollBehavior = ''
       document.removeEventListener('touchmove', preventDefault);
     }
