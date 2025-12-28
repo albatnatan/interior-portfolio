@@ -51,7 +51,7 @@ const ProjectModal = ({ project, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
-        className="max-w-6xl w-full h-[90vh] flex flex-col relative"
+        className="max-w-[98vw] w-full h-[95vh] flex flex-col relative"
       >
         {/* Close Button */}
         <button
@@ -62,11 +62,11 @@ const ProjectModal = ({ project, onClose }) => {
         </button>
 
         {/* Book Area */}
-        <div className="relative flex-grow bg-stone-200/50 backdrop-blur-sm rounded-3xl overflow-hidden flex items-center justify-center p-4 md:p-12 shadow-2xl border border-white/20">
+        <div className="relative flex-grow bg-stone-200/50 backdrop-blur-sm rounded-3xl overflow-hidden flex items-center justify-center p-2 md:p-6 shadow-2xl border border-white/20">
           <div className="w-full h-full flex items-center justify-center">
             <HTMLFlipBook
-              width={500}
-              height={700}
+              width={600}
+              height={800}
               size="stretch"
               minWidth={315}
               maxWidth={1000}
@@ -107,7 +107,7 @@ const ProjectModal = ({ project, onClose }) => {
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-10 pointer-events-none z-10" />
                     
                     {/* The Image */}
-                    <div className="w-full h-full p-2 md:p-4 flex items-center justify-center">
+                    <div className="w-full h-full flex items-center justify-center">
                       <img
                         src={img}
                         alt={`Page ${index + 1}`}
