@@ -5,7 +5,7 @@ import HTMLFlipBook from 'react-pageflip'
 
 const Page = forwardRef((props, ref) => {
   return (
-    <div className="page overflow-hidden bg-white shadow-2xl" ref={ref} data-density={props.density || 'soft'}>
+    <div className="page overflow-hidden bg-white" ref={ref} data-density={props.density || 'soft'}>
       <div className="w-full h-full relative">
         {props.children}
       </div>
@@ -62,17 +62,17 @@ const ProjectModal = ({ project, onClose }) => {
         </button>
 
         {/* Book Area */}
-        <div className="relative flex-grow bg-stone-200/50 backdrop-blur-sm rounded-3xl overflow-hidden flex items-center justify-center p-2 md:p-6 shadow-2xl border border-white/20">
+        <div className="relative flex-grow bg-stone-900 overflow-hidden flex items-center justify-center p-0 shadow-2xl">
           <div className="w-full h-full flex items-center justify-center">
             <HTMLFlipBook
-              width={800}
-              height={600}
+              width={900}
+              height={636}
               size="stretch"
               minWidth={315}
-              maxWidth={1000}
+              maxWidth={2000}
               minHeight={400}
-              maxHeight={1400}
-              maxShadowOpacity={0.6}
+              maxHeight={2000}
+              maxShadowOpacity={0.4}
               showCover={true}
               mobileScrollSupport={true}
               onFlip={onPage}
@@ -81,11 +81,11 @@ const ProjectModal = ({ project, onClose }) => {
               usePortrait={isPortrait}
               startZIndex={0}
               drawShadow={true}
-              flippingTime={800}
+              flippingTime={1000}
               useMouseEvents={true}
               clickEventForward={true}
               swipeDistance={30}
-              showPageCorners={true}
+              showPageCorners={false}
               disableFlipByClick={false}
             >
               {/* Front Cover */}
@@ -102,25 +102,15 @@ const ProjectModal = ({ project, onClose }) => {
 
               {project.images.map((img, index) => (
                 <Page key={index}>
-                  <div className="w-full h-full relative overflow-hidden">
-                    {/* The Image */}
+                  <div className="w-full h-full bg-white flex items-center justify-center">
                     <img
                       src={img}
                       alt={`Page ${index + 1}`}
-                      className="w-full h-full object-cover pointer-events-none"
+                      className="w-full h-full object-contain pointer-events-none"
                     />
                     
-                    {/* Paper Texture Overlay */}
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-10 pointer-events-none z-10" />
-
-                    {/* Depth Gradients (Gutter shadow) */}
-                    <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black/25 to-transparent pointer-events-none z-20" />
-                    <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none z-20" />
-                    
-                    {/* Page Number */}
-                    <div className="absolute bottom-4 right-6 text-white/50 text-[10px] font-mono tracking-widest uppercase z-20">
-                      {index + 1}
-                    </div>
+                    {/* Subtle Gutter Shadow only */}
+                    <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-20" />
                   </div>
                 </Page>
               ))}
