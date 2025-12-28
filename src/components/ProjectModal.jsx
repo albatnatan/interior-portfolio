@@ -102,11 +102,11 @@ const ProjectModal = ({ project, onClose }) => {
 
               {project.images.map((img, index) => (
                 <Page key={index}>
-                  <div className="w-full h-full bg-white flex items-center justify-center">
+                  <div className="w-full h-full bg-white">
                     <img
                       src={img}
                       alt={`Page ${index + 1}`}
-                      className="w-full h-full object-contain pointer-events-none"
+                      className="w-full h-full object-fill pointer-events-none"
                     />
                     
                     {/* Subtle Gutter Shadow only */}
