@@ -65,8 +65,8 @@ const ProjectModal = ({ project, onClose }) => {
         <div className="relative flex-grow bg-stone-200/50 backdrop-blur-sm rounded-3xl overflow-hidden flex items-center justify-center p-2 md:p-6 shadow-2xl border border-white/20">
           <div className="w-full h-full flex items-center justify-center">
             <HTMLFlipBook
-              width={600}
-              height={800}
+              width={800}
+              height={600}
               size="stretch"
               minWidth={315}
               maxWidth={1000}
@@ -107,17 +107,17 @@ const ProjectModal = ({ project, onClose }) => {
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-10 pointer-events-none z-10" />
                     
                     {/* The Image */}
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full h-full">
                       <img
                         src={img}
                         alt={`Page ${index + 1}`}
-                        className="max-w-full max-h-full object-contain shadow-sm pointer-events-none"
+                        className="w-full h-full object-cover pointer-events-none"
                       />
                     </div>
 
                     {/* Depth Gradients */}
-                    <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-20" />
-                    <div className="absolute inset-y-0 right-0 w-4 bg-gradient-to-l from-black/5 to-transparent pointer-events-none z-20" />
+                    <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/20 to-transparent pointer-events-none z-20" />
+                    <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none z-20" />
                     
                     {/* Page Number */}
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-stone-400 text-[10px] font-mono tracking-widest uppercase opacity-60 z-20">
