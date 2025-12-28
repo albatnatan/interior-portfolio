@@ -1,3 +1,55 @@
 {
-  "projects": []
+  "projects": [
+    {
+      "id": "PRFinal",
+      "title": "PRFinal",
+      "image": "projects/PRFinal/cover.jpg",
+      "images": [
+        "projects/PRFinal/cover.jpg",
+        "projects/PRFinal/page_1.jpg",
+        "projects/PRFinal/page_2.jpg",
+        "projects/PRFinal/page_3.jpg",
+        "projects/PRFinal/page_4.jpg",
+        "projects/PRFinal/page_5.jpg",
+        "projects/PRFinal/page_6.jpg",
+        "projects/PRFinal/page_7.jpg",
+        "projects/PRFinal/page_8.jpg",
+        "projects/PRFinal/page_9.jpg",
+        "projects/PRFinal/page_10.jpg",
+        "projects/PRFinal/page_11.jpg",
+        "projects/PRFinal/page_12.jpg",
+        "projects/PRFinal/page_13.jpg",
+        "projects/PRFinal/page_14.jpg",
+        "projects/PRFinal/page_15.jpg",
+        "projects/PRFinal/page_16.jpg",
+        "projects/PRFinal/page_17.jpg",
+        "projects/PRFinal/page_18.jpg",
+        "projects/PRFinal/page_19.jpg",
+        "projects/PRFinal/page_20.jpg",
+        "projects/PRFinal/page_21.jpg",
+        "projects/PRFinal/page_22.jpg",
+        "projects/PRFinal/page_23.jpg",
+        "projects/PRFinal/page_24.jpg",
+        "projects/PRFinal/page_25.jpg",
+        "projects/PRFinal/page_26.jpg",
+        "projects/PRFinal/page_27.jpg",
+        "projects/PRFinal/page_28.jpg",
+        "projects/PRFinal/page_29.jpg",
+        "projects/PRFinal/page_30.jpg",
+        "projects/PRFinal/page_31.jpg",
+        "projects/PRFinal/page_32.jpg",
+        "projects/PRFinal/page_33.jpg",
+        "projects/PRFinal/page_34.jpg",
+        "projects/PRFinal/page_35.jpg",
+        "projects/PRFinal/page_36.jpg",
+        "projects/PRFinal/page_37.jpg",
+        "projects/PRFinal/page_38.jpg",
+        "projects/PRFinal/page_39.jpg",
+        "projects/PRFinal/page_40.jpg",
+        "projects/PRFinal/page_41.jpg",
+        "projects/PRFinal/page_42.jpg"
+      ],
+      "year": "2024"
+    }
+  ]
 }
